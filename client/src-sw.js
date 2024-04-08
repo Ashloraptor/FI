@@ -6,7 +6,7 @@ const { ExpirationPlugin } = require('workbox-expiration');
 const { precacheAndRoute } = require('workbox-precaching/precacheAndRoute');
 //ref from mini project
 const { StaleWhileRevalidate } = require('workbox-strategies');
-const { CacheableResponsePlugin } = require('workbox-cacheable-response');
+// const { CacheableResponsePlugin } = require('workbox-cacheable-response');
 
 precacheAndRoute(self.__WB_MANIFEST);
 
