@@ -3,28 +3,27 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
-
 module.exports = () => {
   return {
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
+      install: './src/js/install.js',
+      database: './src/js/database.js',
+      editor: './src/js/editor.js',
+      header: './src/js/header.js',
     },
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
-    plugins: [
-       // Webpack plugin that generates our html file and injects our bundles. 
+    plugins: [ 
        new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'Contact Cards'
+        title: 'FI'
       }),
      
-      // Injects our custom service worker
+      // service worker
       new InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'src-sw.js',
@@ -34,11 +33,11 @@ module.exports = () => {
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: 'Contact Cards',
-        short_name: 'Contact',
-        description: 'Never forget your contacts!',
-        background_color: '#225ca3',
-        theme_color: '#225ca3',
+        name: 'FI',
+        short_name: 'FI',
+        description: 'Friend, version one, is your friendly text editor, ready when you need it, online or off.',
+        background_color: '#7A128A',
+        theme_color: '#7A128A',
         start_url: './',
         publicPath: './',
         icons: [
@@ -52,6 +51,7 @@ module.exports = () => {
     ],
 
     module: {
+      //CSS loaders
       rules: [
         {
             test: /\.css$/i,
@@ -60,7 +60,6 @@ module.exports = () => {
           {
             test: /\.m?js$/,
             exclude: /node_modules/,
-            // We use babel-loader in order to use ES6.
             use: {
               loader: 'babel-loader',
               options: {
